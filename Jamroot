@@ -1,0 +1,19 @@
+local MAPNIK_DIR = "/opt/mapnik" ;
+local MAPNIK_DEPS_DIR = "/opt/mapnik_deps" ;
+local BOOST_DIR = "/opt/boost-trunk" ;
+
+lib mapnik : : <name>mapnik <search>$(MAPNIK_DIR)/lib ;
+lib system : : <name>boost_system <search>$(BOOST_DIR)/lib ;
+lib timer : chrono : <name>boost_timer <search>$(BOOST_DIR)/lib ;
+lib chrono : system : <name>boost_chrono <search>$(BOOST_DIR)/lib ;
+
+exe mapnik-image-reader
+    :
+    main.cpp
+    .//timer
+    .//mapnik
+    :
+    <include>$(BOOST_DIR)/include
+    <include>$(MAPNIK_DIR)/include
+    <include>$(MAPNIK_DEPS_DIR)/include
+    ;
