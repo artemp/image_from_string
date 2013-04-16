@@ -54,7 +54,10 @@ int main(int argc, char** argv)
             {
                 std::cerr << ex.what() << std::endl;
             }
-
+            catch( std::exception const& ex)
+            {
+                std::cerr << ex.what() << std::endl;
+            }
         }
     }
 
@@ -90,6 +93,10 @@ int main(int argc, char** argv)
                 reader->read(0,0,buffer);
             }
             catch (mapnik::image_reader_exception const& ex)
+            {
+                std::cerr << ex.what() << std::endl;
+            }
+            catch( std::exception const& ex)
             {
                 std::cerr << ex.what() << std::endl;
             }
