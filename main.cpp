@@ -30,7 +30,7 @@ int main(int argc, char** argv)
             std::ifstream is(filename.c_str() , std::ios::binary);
             std::string buffer((std::istreambuf_iterator<char>(is)),
                                std::istreambuf_iterator<char>());
-            const std::unique_ptr<ImageReader> layer(ImageReader::create((uint8_t*)buffer.c_str(),buffer.size()));
+            const std::unique_ptr<ImageReader> layer(ImageReader::create((uint8_t*)buffer.data(),buffer.size()));
             layer->decode();
         }
     }
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
         boost::timer::auto_cpu_timer t;
         for (unsigned count=0; count < NUM_RUNS; ++count)
         {
-            const std::unique_ptr<ImageReader> layer(ImageReader::create((uint8_t*)buffer.c_str(),buffer.size()));
+            const std::unique_ptr<ImageReader> layer(ImageReader::create((uint8_t*)buffer.data(),buffer.size()));
             layer->decode();
         }
     }
