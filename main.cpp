@@ -38,28 +38,23 @@ int main(int argc, char** argv)
 
     { // mapnik
         std::cerr << "========== Mapnik image_reader FROM FILE" << std::endl;
-        try {
-            std::cout << "NUM_RUNS="<<NUM_RUNS << std::endl;
-            boost::timer::auto_cpu_timer t;
-            for (unsigned count=0; count < NUM_RUNS; ++count)
-            {
-                const std::unique_ptr<mapnik::image_reader> reader(mapnik::get_image_reader(filename));
-                if (reader.get())
-                {
-                    unsigned width = reader->width();
-                    unsigned height = reader->height();
-                    mapnik::image_data_32 buffer(width,height);
-                    reader->read(0,0,buffer);
-                }
-                else
-                {
-                    std::cerr << "Can't create reader ...:)" << std::endl;
-                }
-            }
-        }
-        catch (mapnik::image_reader_exception const& ex)
+
+        std::cout << "NUM_RUNS="<<NUM_RUNS << std::endl;
+        boost::timer::auto_cpu_timer t;
+        for (unsigned count=0; count < NUM_RUNS; ++count)
         {
-            std::cerr << ex.what() << std::endl;
+            try {
+                const std::unique_ptr<mapnik::image_reader> reader(mapnik::get_image_reader(filename));
+                unsigned width = reader->width();
+                unsigned height = reader->height();
+                mapnik::image_data_32 buffer(width,height);
+                reader->read(0,0,buffer);
+            }
+            catch (mapnik::image_reader_exception const& ex)
+            {
+                std::cerr << ex.what() << std::endl;
+            }
+
         }
     }
 
@@ -82,30 +77,23 @@ int main(int argc, char** argv)
 
     { // mapnik
         std::cerr << "========== Mapnik image_reader FROM MEM BUFFER" << std::endl;
-        try {
-            std::cout << "NUM_RUNS="<<NUM_RUNS << std::endl;
-            boost::timer::auto_cpu_timer t;
-            for (unsigned count=0; count < NUM_RUNS; ++count)
-            {
+
+        std::cout << "NUM_RUNS="<<NUM_RUNS << std::endl;
+        boost::timer::auto_cpu_timer t;
+        for (unsigned count=0; count < NUM_RUNS; ++count)
+        {
+            try {
                 const std::unique_ptr<mapnik::image_reader> reader(mapnik::get_image_reader(buffer.data(), buffer.size()));
-                if (reader.get())
-                {
-                    unsigned width = reader->width();
-                    unsigned height = reader->height();
-                    mapnik::image_data_32 buffer(width,height);
-                    reader->read(0,0,buffer);
-                }
-                else
-                {
-                    std::cerr << "Can't create reader ...:)" << std::endl;
-                }
+                unsigned width = reader->width();
+                unsigned height = reader->height();
+                mapnik::image_data_32 buffer(width,height);
+                reader->read(0,0,buffer);
+            }
+            catch (mapnik::image_reader_exception const& ex)
+            {
+                std::cerr << ex.what() << std::endl;
             }
         }
-        catch (mapnik::image_reader_exception const& ex)
-        {
-            std::cerr << ex.what() << std::endl;
-        }
     }
-
     return 0;
 }
