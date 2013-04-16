@@ -7,13 +7,18 @@ lib system : : <name>boost_system <search>$(BOOST_DIR)/lib ;
 lib timer : chrono : <name>boost_timer <search>$(BOOST_DIR)/lib ;
 lib chrono : system : <name>boost_chrono <search>$(BOOST_DIR)/lib ;
 
+lib jpeg : : <name>jpeg <search>$(MAPNIK_DEPS_DIR)/lib ;
+
 exe mapnik-image-reader
     :
     main.cpp
+    /Users/artem/Projects/mapbox/node-blend/src/reader.cpp
     .//timer
     .//mapnik
+    .//jpeg
     :
     <include>$(BOOST_DIR)/include
     <include>$(MAPNIK_DIR)/include
     <include>$(MAPNIK_DEPS_DIR)/include
+    <include>/Users/artem/Projects/mapbox/node-blend/src
     ;
