@@ -13,7 +13,7 @@ int main(int argc, char** argv)
     std::cout << "Image from string..." << std::endl;
     if (argc!=3)
     {
-        std::cout << "Usage:" << argv[0] << " <png> <num_runs>" << std::endl;
+        std::cout << "Usage:" << argv[0] << " <path-to-image-file> <num_runs>" << std::endl;
         return 1;
     }
     unsigned NUM_RUNS = std::atoi(argv[2]);
