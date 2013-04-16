@@ -44,19 +44,12 @@ int main(int argc, char** argv)
             for (unsigned count=0; count < NUM_RUNS; ++count)
             {
                 const std::unique_ptr<mapnik::image_reader> reader(mapnik::get_image_reader((char*)buffer.c_str(),buffer.size()));
-                //const std::unique_ptr<mapnik::image_reader> reader(mapnik::get_image_reader(filename));
                 if (reader.get())
                 {
                     unsigned width = reader->width();
                     unsigned height = reader->height();
-                    //std::cout << "Image (" << width << "," << height << ")" << std::endl;
                     mapnik::image_data_32 buffer(width,height);
-                    //for (unsigned count=0; count < NUM_RUNS; ++count)
-                    //{
                     reader->read(0,0,buffer);
-                    //}
-                    // write image
-                    //mapnik::save_to_file(buffer,"output.png");
                 }
                 else
                 {
